@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor Lista → data.json · Organigrama Inetum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root {
+  --bg: #FAFAF8; --card: #FFFFFF; --border: #E5E3DD;
+  --text: #1A1A1A; --text-dim: #6B6B6B;
+  --accent: #E6007E; --accent-soft: #FCE0EE; --accent-strong: #B30060;
+  --success: #007F73; --success-soft: #DCEFEC;
+  --warn: #C97800; --warn-soft: #FBE9CC;
+  --error: #C0392B; --error-soft: #FADBD8;
+  --shadow: 0 1px 3px rgba(20,20,20,.06), 0 4px 12px rgba(20,20,20,.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 40px 20px; -webkit-font-smoothing: antialiased; }
+.container { max-width: 980px; margin: 0 auto; }
+header { text-align: center; margin-bottom: 40px; }
+.brand-mark { display: inline-flex; width: 64px; height: 64px; background: var(--accent); border-radius: 16px; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 900; font-size: 32px; color: white; letter-spacing: -2px; margin-bottom: 20px; }
+h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 36px; line-height: 1.1; margin-bottom: 10px; }
+.subtitle { font-size: 16px; color: var(--text-dim); max-width: 600px; margin: 0 auto; line-height: 1.5; }
+.subtitle code { font-family: 'JetBrains Mono', monospace; background: var(--card); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border); font-size: 13px; }
+.step { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: var(--shadow); }
+.step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-title { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; }
+.step-desc { color: var(--text-dim); font-size: 14px; margin-bottom: 16px; line-height: 1.55; }
+.dropzone { border: 2px dashed var(--border); border-radius: 12px; padding: 50px 20px; text-align: center; background: var(--bg); transition: all .2s; cursor: pointer; }
+.dropzone:hover, .dropzone.dragover { border-color: var(--accent); background: var(--accent-soft); }
+.dropzone-icon { font-size: 48px; margin-bottom: 12px; filter: grayscale(1); opacity: .7; }
+.dropzone:hover .dropzone-icon, .dropzone.dragover .dropzone-icon { filter: none; opacity: 1; }
+.dropzone-text { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.dropzone-hint { font-size: 13px; color: var(--text-dim); }
+input[type="file"] { display: none; }
+.status { padding: 14px 18px; border-radius: 10px; margin-top: 16px; font-size: 14px; display: none; line-height: 1.5; }
+.status.show { display: block; }
+.status.ok { background: var(--success-soft); color: var(--success); }
+.status.warn { background: var(--warn-soft); color: var(--warn); }
+.status.error { background: var(--error-soft); color: var(--error); }
+.mapping { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 14px; }
+.mapping-row { display: grid; grid-template-columns: 220px 1fr; gap: 14px; align-items: center; padding: 6px 0; font-size: 13px; }
+.mapping-row .label { font-weight: 600; color: var(--text); }
+.mapping-row .value { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); }
+.mapping-row .value .ok { color: var(--success); font-weight: 600; }
+.mapping-row .value .warn { color: var(--warn); }
+.mapping-row .value .err { color: var(--error); font-weight: 600; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+.stat { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+.stat-num { font-family: 'Fraunces', serif; font-weight: 700; font-size: 28px; color: var(--accent); }
+.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-dim); margin-top: 4px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; background: var(--accent); color: white; border: none; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .15s; text-decoration: none; }
+.btn:hover { background: var(--accent-strong); transform: translateY(-1px); }
+.btn.secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+.btn.secondary:hover { background: var(--bg); border-color: var(--text); }
+.preview { margin-top: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; max-height: 320px; overflow: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.5; color: var(--text-dim); }
+.cols-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+.cols-table th, .cols-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.cols-table th { background: var(--bg); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-dim); }
+.cols-table code { font-family: 'JetBrains Mono', monospace; background: var(--bg); padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .3px; }
+.tag.req { background: var(--error-soft); color: var(--error); }
+.tag.opt { background: var(--bg); color: var(--text-dim); border: 1px solid var(--border); }
+.tag.hier { background: var(--success-soft); color: var(--success); }
+.actions-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+#hidden-step3, #hidden-step4 { display: none; }
+.show { display: block !important; }
+footer { text-align: center; color: var(--text-dim); font-size: 12px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+footer code { font-family: 'JetBrains Mono', monospace; }
+.warnings { background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent); border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-size: 12px; color: var(--warn); max-height: 200px; overflow-y: auto; }
+.warnings ul { margin: 6px 0 0 0; padding-left: 20px; }
+.warnings li { margin: 2px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="brand-mark">I</div>
+    <h1>Conversor Lista → <code style="font-family:'JetBrains Mono',monospace;font-size:28px;background:none;border:none;padding:0">data.json</code></h1>
+    <p class="subtitle">Arrastra el CSV/Excel exportado desde tu <b>Microsoft List "Equipo Inetum Consulting"</b> y descarga el <code>data.json</code> listo para GitHub. 🩴</p>
+  </header>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Columnas reales de tu Lista (adaptado)</div>
+    </div>
+    <p class="step-desc">Configurado para las columnas EXACTAS de tu Lista SharePoint. No tienes que modificar nada — exporta tal cual.</p>
+    <table class="cols-table">
+      <thead>
+        <tr><th>Columna en tu Lista</th><th>Uso</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>ID M365</code></td><td>Identificador único</td><td><span class="tag req">Requerido</span></td></tr>
+        <tr><td><code>Nombre</code> + <code>Surname</code></td><td>Nombre completo e iniciales (en title case)</td><td><span class="tag req">Requerido</span></td></tr>
+        <tr><td><code>Rol/Posición</code></td><td>Seniority + jerarquía automática</td><td><span class="tag req">Requerido</span></td></tr>
+        <tr><td><code>Team</code></td><td>Equipo(s) multi-valor: <code>["FSI","P&T"]</code></td><td><span class="tag req">Requerido</span></td></tr>
+        <tr><td><code>Práctica/Sector</code></td><td>Práctica vs Sector</td><td><span class="tag opt">Opcional</span></td></tr>
+        <tr><td><code>Responsable Staffing</code></td><td><b>Manager directo</b> (jerarquía REAL si existe)</td><td><span class="tag hier">Jerarquía</span></td></tr>
+        <tr><td><code>Mentor</code></td><td>Relación matricial (mentoría)</td><td><span class="tag hier">Matricial</span></td></tr>
+        <tr><td><code>Estatus</code></td><td>Activo / Baja Temporal / Inactivo / Demanda</td><td><span class="tag opt">Opcional</span></td></tr>
+        <tr><td><code>Location</code></td><td>Ciudad</td><td><span class="tag opt">Opcional</span></td></tr>
+        <tr><td><code>Entry Date</code></td><td>Fecha entrada (DD/MM/YYYY)</td><td><span class="tag opt">Opcional</span></td></tr>
+        <tr><td><code>CostCenter · Código SAP · Junior · Horas semanales</code></td><td>Metadatos</td><td><span class="tag opt">Opcional</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Sube el archivo exportado</div>
+    </div>
+    <p class="step-desc">En la Lista SharePoint: <b>Exportar → Exportar a CSV</b>. Luego arrastra aquí 👇</p>
+    <label for="fileInput" class="dropzone" id="dropzone">
+      <div class="dropzone-icon">📊</div>
+      <div class="dropzone-text">Arrastra el .csv o .xlsx aquí</div>
+      <div class="dropzone-hint">o haz click para seleccionar</div>
+    </label>
+    <input type="file" id="fileInput" accept=".csv,.xlsx,.xls">
+    <div id="status1" class="status"></div>
+  </div>
+
+  <div class="step" id="hidden-step3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Mapeo y validación</div>
+    </div>
+    <div id="mapping" class="mapping"></div>
+    <div class="stats" id="stats"></div>
+    <div id="status3" class="status"></div>
+    <div id="warnings" class="warnings" style="display:none"></div>
+  </div>
+
+  <div class="step" id="hidden-step4">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Descarga el <code style="font-family:'JetBrains Mono',monospace">data.json</code></div>
+    </div>
+    <p class="step-desc">Vista previa (primeras 3 personas). Pulsa "Descargar" y sube el archivo a tu repo de GitHub.</p>
+    <div id="preview" class="preview"></div>
+    <div class="actions-row">
+      <button id="downloadBtn" class="btn"><span>⬇</span> Descargar data.json</button>
+      <button id="copyBtn" class="btn secondary"><span>📋</span> Copiar al portapapeles</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>🩴 Conversor <code>v2.0</code> · Inetum Consulting España · Adaptado a columnas reales de SharePoint</p>
+  </footer>
+</div>
+
+<script>
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const status1 = document.getElementById('status1');
+let generatedJson = null;
+
+['dragenter', 'dragover'].forEach(ev => {
+  dropzone.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.add('dragover'); });
+});
+['dragleave', 'drop'].forEach(ev => {
+  dropzone.addEventListener(ev, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.remove('dragover'); });
+});
+dropzone.addEventListener('drop', (e) => { if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]); });
+fileInput.addEventListener('change', (e) => { if (e.target.files.length) handleFile(e.target.files[0]); });
+
+function showStatus(el, msg, kind) {
+  el.className = 'status show ' + kind;
+  el.innerHTML = msg;
+}
+
+function normalizeColName(s) {
+  return String(s || '').trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[\/\s_-]+/g, '');
+}
+
+// Mapeo a las columnas REALES de tu Lista de SharePoint
+const COL_MAP = {
+  'idm365': 'id', 'id': 'id',
+  'nombre': 'firstName', 'name': 'firstName',
+  'surname': 'lastName', 'apellido': 'lastName', 'apellidos': 'lastName',
+  'rolposicion': 'role', 'rol': 'role', 'role': 'role',
+  'team': 'team', 'equipo': 'team',
+  'practicasector': 'sector', 'practica': 'sector', 'sector': 'sector',
+  'codigosap': 'sapCode', 'sapcode': 'sapCode',
+  'estatus': 'status', 'status': 'status', 'estado': 'status',
+  'location': 'location', 'ubicacion': 'location',
+  'entrydate': 'entryDate', 'fechaentrada': 'entryDate',
+  'costcenter': 'costCenter', 'centrocoste': 'costCenter',
+  'horassemanales': 'weeklyHours', 'weeklyhours': 'weeklyHours',
+  'junior': 'isJunior',
+  'mentor': 'mentor',
+  'responsablestaffing': 'manager', 'manager': 'manager',
+  'leavedatereturndate': 'leaveDate', 'fechabaja': 'leaveDate',
+  'edicionhas': 'editionHAS'
+};
+
+// Parser robusto multi-valor: acepta JSON array de SharePoint o separadores
+function parseMultiValue(raw) {
+  if (raw === null || raw === undefined) return [];
+  const s = String(raw).trim();
+  if (!s) return [];
+  
+  // JSON array de SharePoint: ["FSI","P&T"]
+  if (s.startsWith('[') && s.endsWith(']')) {
+    try {
+      const parsed = JSON.parse(s);
+      if (Array.isArray(parsed)) return parsed.map(v => String(v).trim()).filter(Boolean);
+    } catch (e) {
+      const clean = s.slice(1, -1).replace(/"/g, '');
+      return clean.split(/[;,]/).map(v => v.trim()).filter(Boolean);
+    }
+  }
+  if (s.includes(';#')) return s.split(/;#+/).map(v => v.trim()).filter(Boolean);
+  if (s.includes(';')) return s.split(';').map(v => v.trim()).filter(Boolean);
+  return [s];
+}
+
+function parseDate(raw) {
+  if (!raw) return '';
+  if (raw instanceof Date && !isNaN(raw)) return raw.toISOString().slice(0, 10);
+  const s = String(raw).trim();
+  if (!s) return '';
+  let m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return m[0];
+  m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m) return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+  return s;
+}
+
+function titleCase(s) {
+  if (!s) return '';
+  return String(s).toLowerCase().split(' ').map(w => 
+    w ? w[0].toUpperCase() + w.slice(1) : w
+  ).join(' ').replace(/\s+/g, ' ').trim();
+}
+
+function handleFile(file) {
+  showStatus(status1, '⏳ Leyendo <b>' + file.name + '</b>...', 'warn');
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const wb = XLSX.read(e.target.result, { type: 'binary', cellDates: true, codepage: 65001 });
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(sheet, { defval: '', raw: false });
+      if (!rows.length) { showStatus(status1, '⚠️ Archivo vacío.', 'error'); return; }
+      processRows(rows, file.name);
+    } catch (err) {
+      console.error(err);
+      showStatus(status1, '❌ Error: ' + err.message, 'error');
+    }
+  };
+  reader.onerror = () => showStatus(status1, '❌ No se pudo leer.', 'error');
+  reader.readAsBinaryString(file);
+}
+
+function processRows(rows, fileName) {
+  showStatus(status1, '✅ Leído <b>' + fileName + '</b> · <b>' + rows.length + '</b> filas', 'ok');
+  
+  const originalCols = Object.keys(rows[0]);
+  const colMapping = {};
+  for (const col of originalCols) {
+    const norm = normalizeColName(col);
+    const target = COL_MAP[norm];
+    if (target && !colMapping[target]) colMapping[target] = col;
+  }
+  
+  const required = [
+    {field: 'id', label: 'ID M365'},
+    {field: 'firstName', label: 'Nombre'},
+    {field: 'lastName', label: 'Surname (Apellidos)'},
+    {field: 'role', label: 'Rol/Posición'},
+    {field: 'team', label: 'Team'}
+  ];
+  const optional = [
+    {field: 'sector', label: 'Práctica/Sector'},
+    {field: 'manager', label: 'Responsable Staffing 🎯'},
+    {field: 'mentor', label: 'Mentor'},
+    {field: 'status', label: 'Estatus'},
+    {field: 'location', label: 'Location'},
+    {field: 'entryDate', label: 'Entry Date'},
+    {field: 'sapCode', label: 'Código SAP'},
+    {field: 'costCenter', label: 'CostCenter'},
+    {field: 'isJunior', label: 'Junior'},
+    {field: 'weeklyHours', label: 'Horas semanales'}
+  ];
+  
+  let html = '';
+  let missingRequired = [];
+  for (const r of required) {
+    if (colMapping[r.field]) {
+      html += `<div class="mapping-row"><div class="label">${r.label}</div><div class="value"><span class="ok">✓ ${colMapping[r.field].trim()}</span></div></div>`;
+    } else {
+      html += `<div class="mapping-row"><div class="label">${r.label} <span class="tag req">req</span></div><div class="value"><span class="err">✗ NO ENCONTRADA</span></div></div>`;
+      missingRequired.push(r.label);
+    }
+  }
+  for (const r of optional) {
+    if (colMapping[r.field]) {
+      html += `<div class="mapping-row"><div class="label">${r.label}</div><div class="value"><span class="ok">✓ ${colMapping[r.field].trim()}</span></div></div>`;
+    } else {
+      html += `<div class="mapping-row"><div class="label">${r.label}</div><div class="value"><span class="warn">⊘ sin mapear</span></div></div>`;
+    }
+  }
+  document.getElementById('mapping').innerHTML = html;
+  document.getElementById('hidden-step3').classList.add('show');
+  
+  if (missingRequired.length) {
+    showStatus(document.getElementById('status3'),
+      '❌ Faltan columnas requeridas: <b>' + missingRequired.join(', ') + '</b>',
+      'error');
+    return;
+  }
+  
+  const people = [];
+  const warnings = [];
+  let withTeam = 0, withSector = 0, withManager = 0, activos = 0;
+  
+  for (const row of rows) {
+    let id = String(row[colMapping.id] || '').trim();
+    // Si no tiene ID (normalmente inactivos), generar uno desde Surname+Nombre
+    if (!id) {
+      const sn = String(row[colMapping.lastName] || '').trim();
+      const nm = String(row[colMapping.firstName] || '').trim();
+      if (sn || nm) {
+        id = '_anon_' + (sn + '_' + nm).replace(/\s+/g, ' ').trim();
+        warnings.push(`Sin ID M365 → asignado: ${id}`);
+      } else {
+        warnings.push('Fila completamente vacía omitida');
+        continue;
+      }
+    }
+    
+    const firstName = titleCase(String(row[colMapping.firstName] || '').trim());
+    const lastName = titleCase(String(row[colMapping.lastName] || '').trim());
+    const fullName = (firstName + ' ' + lastName).replace(/\s+/g, ' ').trim();
+    const initials = ((firstName[0] || '') + (lastName[0] || '')).toUpperCase();
+    
+    const role = String(row[colMapping.role] || '').trim();
+    if (!role) warnings.push(`${id}: sin rol`);
+    
+    const teams = parseMultiValue(row[colMapping.team]);
+    if (teams.length) withTeam++; else warnings.push(`${id}: sin Team`);
+    
+    let statusList = colMapping.status ? parseMultiValue(row[colMapping.status]) : [];
+    let status = 'Activo';
+    if (statusList.length) {
+      if (statusList.includes('Baja Temporal')) status = 'Baja Temporal';
+      else if (statusList.includes('Inactivo')) status = 'Inactivo';
+      else if (statusList.includes('Demanda')) status = 'Demanda';
+      else status = statusList[0];
+    }
+    if (status === 'Activo') activos++;
+    
+    const sector = colMapping.sector ? String(row[colMapping.sector] || '').trim() : '';
+    if (sector) withSector++;
+    
+    const manager = colMapping.manager ? String(row[colMapping.manager] || '').trim() : '';
+    if (manager) withManager++;
+    const mentor = colMapping.mentor ? String(row[colMapping.mentor] || '').trim() : '';
+    
+    const location = colMapping.location ? String(row[colMapping.location] || '').trim() : '';
+    const sapCode = colMapping.sapCode ? String(row[colMapping.sapCode] || '').trim() : '';
+    const costCenter = colMapping.costCenter ? String(row[colMapping.costCenter] || '').trim() : '';
+    const weeklyHours = colMapping.weeklyHours ? String(row[colMapping.weeklyHours] || '').trim() : '';
+    const entryDate = parseDate(row[colMapping.entryDate]);
+    const leaveDate = parseDate(row[colMapping.leaveDate]);
+    
+    let isJunior = false;
+    if (colMapping.isJunior) {
+      const v = String(row[colMapping.isJunior] || '').trim().toLowerCase();
+      isJunior = ['1', 'true', 'verdadero', 'si', 'sí'].includes(v);
+    }
+    if (!isJunior && role === 'Analyst (Junior Consultant)') isJunior = true;
+    
+    people.push({
+      id, fullName, firstName, lastName, initials, role,
+      team: teams, teamDisplay: teams.join(', '),
+      sector, location, entryDate, costCenter, sapCode,
+      isJunior, status, manager, mentor, leaveDate, weeklyHours,
+      inList: true, photoUrl: ''
+    });
+  }
+  
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-num">${people.length}</div><div class="stat-label">Personas</div></div>
+    <div class="stat"><div class="stat-num">${activos}</div><div class="stat-label">Activos</div></div>
+    <div class="stat"><div class="stat-num">${new Set(people.flatMap(p => p.team)).size}</div><div class="stat-label">Teams únicos</div></div>
+    <div class="stat"><div class="stat-num">${withManager}</div><div class="stat-label">Con Manager 🎯</div></div>
+  `;
+  
+  let summary = `✅ Procesadas <b>${people.length} personas</b>.`;
+  if (withManager > 0) {
+    summary += ` 🎯 Detectados <b>${withManager} managers directos</b> (jerarquía REAL desde "Responsable Staffing").`;
+  } else {
+    summary += ` La jerarquía se inferirá automáticamente por <b>seniority + team</b>.`;
+  }
+  showStatus(document.getElementById('status3'), summary, 'ok');
+  
+  if (warnings.length) {
+    const warnDiv = document.getElementById('warnings');
+    warnDiv.style.display = 'block';
+    warnDiv.innerHTML = '<b>⚠️ Avisos (' + warnings.length + '):</b><ul>' + 
+      warnings.slice(0, 15).map(w => '<li>' + w + '</li>').join('') + 
+      (warnings.length > 15 ? '<li><i>... y ' + (warnings.length - 15) + ' más</i></li>' : '') + '</ul>';
+  } else {
+    document.getElementById('warnings').style.display = 'none';
+  }
+  
+  generatedJson = {
+    metadata: {
+      title: 'Organigrama Equipo Inetum Consulting España',
+      totalPeople: people.length,
+      generatedAt: new Date().toISOString().slice(0, 16).replace('T', ' '),
+      source: 'Microsoft List · ' + fileName
+    },
+    people: people
+  };
+  
+  document.getElementById('preview').textContent = 
+    JSON.stringify({ metadata: generatedJson.metadata, people: people.slice(0, 3) }, null, 2) + 
+    '\n\n... (+ ' + (people.length - 3) + ' personas más)';
+  document.getElementById('hidden-step4').classList.add('show');
+}
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  if (!generatedJson) return;
+  const blob = new Blob([JSON.stringify(generatedJson, null, 2)], { type: 'application/json;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'data.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  if (!generatedJson) return;
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(generatedJson, null, 2));
+    const btn = document.getElementById('copyBtn');
+    const original = btn.innerHTML;
+    btn.innerHTML = '<span>✓</span> Copiado!';
+    setTimeout(() => btn.innerHTML = original, 2000);
+  } catch (err) { alert('Error: ' + err.message); }
+});
+</script>
+</body>
+</html>

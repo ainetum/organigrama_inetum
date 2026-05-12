@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organigrama · Equipo Inetum Consulting España</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --bg-soft: #F2F2EE;
+  --card: #FFFFFF;
+  --card-hover: #FBFAF4;
+  --border: #E5E3DD;
+  --border-strong: #C9C5BB;
+  --line: #D8D5CC;
+  --text: #1A1A1A;
+  --text-dim: #6B6B6B;
+  --text-faint: #9B9B9B;
+  --accent: #E6007E;
+  --accent-soft: #FCE0EE;
+  --accent-strong: #B30060;
+  --matrix: #007F73;
+  --matrix-soft: #DCEFEC;
+  --warn: #C97800;
+  --warn-soft: #FBE9CC;
+  --inactive: #A8A8A8;
+  --shadow-card: 0 1px 2px rgba(20,20,20,0.04), 0 1px 3px rgba(20,20,20,0.06);
+  --shadow-hover: 0 2px 6px rgba(20,20,20,0.06), 0 6px 16px rgba(20,20,20,0.08);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --indent: 36px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === HEADER === */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 28px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 20px;
+  color: white;
+  letter-spacing: -1px;
+}
+.brand h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: -0.4px;
+}
+.brand .subtitle {
+  font-size: 10px;
+  color: var(--text-faint);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.toolbar {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 24px;
+}
+.search-box { position: relative; width: 320px; }
+.search-box input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px 10px 36px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  transition: all 0.15s;
+}
+.search-box input:focus { border-color: var(--accent); background: var(--card); box-shadow: 0 0 0 3px var(--accent-soft); }
+.search-box svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-faint); pointer-events: none; }
+
+.btn-toolbar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 13px;
+  font-size: 12px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.btn-toolbar:hover { border-color: var(--border-strong); color: var(--text); background: var(--card-hover); }
+.btn-toolbar.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.btn-toolbar.primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: white; }
+.btn-toolbar.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.stats {
+  display: flex;
+  gap: 18px;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  letter-spacing: 0.3px;
+}
+.stats b { color: var(--text); font-weight: 600; margin-right: 4px; font-family: var(--font-display); font-size: 13px; }
+
+/* === FILTERS BAR === */
+.filters-bar {
+  display: flex;
+  gap: 14px;
+  padding: 12px 28px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.filter-group { display: flex; gap: 6px; align-items: center; padding-right: 14px; border-right: 1px solid var(--border); flex-wrap: wrap; }
+.filter-group:last-of-type { border-right: none; }
+.filter-label {
+  font-size: 10px;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.chip {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 5px 11px;
+  font-size: 11px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.chip:hover { border-color: var(--border-strong); color: var(--text); }
+.chip.active { background: var(--accent); border-color: var(--accent); color: white; }
+.chip .count {
+  background: rgba(0,0,0,0.06);
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.chip.active .count { background: rgba(255,255,255,0.25); color: white; }
+.clear-btn {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--text-faint);
+  font-size: 11px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.clear-btn:hover { color: var(--accent); }
+
+/* === OUTLINE === */
+.outline-wrapper {
+  flex: 1;
+  padding: 24px 28px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+.outline-section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-faint);
+  margin: 32px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.outline-section-title:first-child { margin-top: 0; }
+
+.row-container { position: relative; }
+.row-container > .row-children {
+  margin-left: var(--indent);
+  position: relative;
+}
+.row-container > .row-children::before {
+  content: '';
+  position: absolute;
+  left: -19px;
+  top: 0;
+  bottom: 14px;
+  width: 1.5px;
+  background: var(--line);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  margin: 3px 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+.row::before {
+  content: '';
+  position: absolute;
+  left: -19px;
+  top: 50%;
+  width: 14px;
+  height: 1.5px;
+  background: var(--line);
+}
+.row-container.root-row > .row::before { display: none; }
+.row:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateX(2px);
+  background: var(--card-hover);
+}
+
+/* Variants */
+.row.is-matrix {
+  border-style: dashed;
+  border-color: var(--matrix);
+  background: var(--matrix-soft);
+}
+.row.is-matrix:hover { border-color: var(--matrix); box-shadow: 0 2px 6px rgba(0,127,115,0.1), 0 6px 16px rgba(0,127,115,0.12); }
+.row.is-inactive { opacity: 0.55; }
+.row.is-baja { border-color: var(--warn); background: var(--warn-soft); }
+.row.is-me {
+  border-color: var(--accent);
+  background: linear-gradient(90deg, var(--accent-soft) 0%, var(--card) 70%);
+  border-width: 1.5px;
+}
+.row.is-root {
+  background: var(--text);
+  color: white;
+  border-color: var(--text);
+  padding: 14px 16px;
+}
+.row.is-root .name, .row.is-root .role { color: white; }
+.row.is-jose-otero {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  padding: 13px 14px;
+}
+.row.is-jose-otero .name, .row.is-jose-otero .role { color: white; }
+.row.is-sin-asignar {
+  background: var(--bg-soft);
+  border-style: dashed;
+  border-color: var(--text-faint);
+  color: var(--text-dim);
+}
+
+.row.dimmed { opacity: 0.25; }
+.row.search-match { box-shadow: 0 0 0 2px var(--warn), var(--shadow-hover); border-color: var(--warn); }
+.row.highlight-branch { border-color: var(--accent); box-shadow: 0 0 0 1.5px var(--accent); }
+
+.toggle {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-faint);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.12s;
+}
+.toggle:hover { background: var(--bg-soft); color: var(--text); }
+.toggle.invisible { visibility: hidden; }
+.row.is-root .toggle, .row.is-jose-otero .toggle { color: rgba(255,255,255,0.7); }
+.row.is-root .toggle:hover, .row.is-jose-otero .toggle:hover { background: rgba(255,255,255,0.15); color: white; }
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F5F2EA 0%, #EBE6D8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  letter-spacing: -0.3px;
+  border: 1px solid var(--border);
+}
+.row.is-matrix .avatar { background: linear-gradient(135deg, #C9E5E1 0%, #A5D2CC 100%); color: var(--matrix); border-color: var(--matrix); }
+.row.is-root .avatar { background: rgba(255,255,255,0.18); color: white; border-color: rgba(255,255,255,0.3); }
+.row.is-jose-otero .avatar { background: rgba(255,255,255,0.2); color: white; border-color: rgba(255,255,255,0.3); }
+.row.is-sin-asignar .avatar { background: var(--border); color: var(--text-faint); }
+
+.info { flex: 1; min-width: 0; display: flex; align-items: center; gap: 14px; }
+.info-main { min-width: 0; flex: 1; }
+.name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.role {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row.is-root .name { font-size: 14px; font-family: var(--font-display); font-weight: 600; }
+
+.tags { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+.tag {
+  font-size: 9.5px;
+  padding: 2px 7px;
+  background: var(--bg-soft);
+  color: var(--text-dim);
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+}
+.tag.team { background: var(--card); border-color: var(--border); color: var(--text-dim); }
+.tag.location { background: transparent; border-color: var(--border); color: var(--text-faint); }
+.tag.junior { background: var(--matrix-soft); color: var(--matrix); border-color: var(--matrix); }
+.tag.inactive { background: #EBEBEB; color: var(--text-faint); border-color: #DDD; }
+.tag.baja { background: var(--warn-soft); color: var(--warn); border-color: var(--warn); }
+.tag.matrix-pill { background: var(--matrix-soft); color: var(--matrix); border-color: var(--matrix); }
+.tag.matrix-extra { background: transparent; color: var(--matrix); border-color: var(--matrix); border-style: dashed; font-weight: 500; max-width: 280px; overflow: hidden; text-overflow: ellipsis; text-transform: none; letter-spacing: 0.2px; }
+
+.count-badge {
+  background: var(--bg-soft);
+  color: var(--text-dim);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.row.is-root .count-badge { background: rgba(255,255,255,0.18); color: white; border-color: transparent; }
+.row.is-jose-otero .count-badge { background: rgba(255,255,255,0.22); color: white; border-color: transparent; }
+
+/* === MODAL === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20,20,20,0.45);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.18s;
+}
+.modal-overlay.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: var(--card);
+  border-radius: 16px;
+  width: 500px;
+  max-width: 92vw;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.22s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideUp { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-header {
+  padding: 28px 28px 22px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg-soft) 0%, var(--card) 100%);
+}
+.modal-header .avatar { width: 64px; height: 64px; font-size: 18px; border-width: 1.5px; }
+.modal-title h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+.modal-title .role { font-size: 13px; color: var(--text-dim); margin-top: 4px; }
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.15s;
+  z-index: 1;
+}
+.modal-close:hover { color: var(--text); border-color: var(--border-strong); }
+
+.modal-body { padding: 22px 28px; overflow-y: auto; }
+.detail-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  align-items: center;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-label {
+  color: var(--text-faint);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.detail-value { color: var(--text); }
+.detail-value .tag { margin-right: 4px; font-size: 10px; }
+
+.modal-actions {
+  padding: 16px 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  background: var(--bg-soft);
+}
+.btn-modal {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-modal:hover { border-color: var(--border-strong); background: var(--card-hover); }
+.btn-modal.primary { background: var(--accent); border-color: var(--accent); color: white; }
+.btn-modal.primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+@media (max-width: 900px) {
+  .stats { display: none; }
+  .search-box { width: 200px; }
+  .brand .subtitle { display: none; }
+  .filters-bar { padding: 10px 16px; }
+  .outline-wrapper { padding: 16px; }
+  .info-main { max-width: 60vw; }
+}
+
+
+/* === COMPACT GRID (vista compacta para hojas) === */
+.compact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 8px 0 8px 0;
+  position: relative;
+}
+.row-children > .compact-grid {
+  margin-left: 0;
+}
+.compact-grid::before {
+  content: '';
+  position: absolute;
+  left: -19px;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--line);
+}
+.compact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+.compact-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  background: var(--card-hover);
+}
+.compact-card.is-matrix {
+  border-style: dashed;
+  border-color: var(--matrix);
+  background: var(--matrix-soft);
+}
+.compact-card.is-matrix:hover { border-color: var(--matrix); }
+.compact-card.is-inactive { opacity: 0.55; }
+.compact-card.is-baja { border-color: var(--warn); background: var(--warn-soft); }
+.compact-card.is-me {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--card) 100%);
+  border-width: 1.5px;
+}
+.compact-card.dimmed { opacity: 0.25; }
+.compact-card.search-match { box-shadow: 0 0 0 2px var(--warn), var(--shadow-hover); border-color: var(--warn); }
+.compact-card.highlight-branch { border-color: var(--accent); box-shadow: 0 0 0 1.5px var(--accent); }
+
+.compact-card .avatar-lg {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F5F2EA 0%, #EBE6D8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-dim);
+  letter-spacing: -0.4px;
+  border: 1.5px solid var(--border);
+  margin-bottom: 2px;
+}
+.compact-card.is-matrix .avatar-lg {
+  background: linear-gradient(135deg, #C9E5E1 0%, #A5D2CC 100%);
+  color: var(--matrix);
+  border-color: var(--matrix);
+}
+.compact-card .c-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.1px;
+  line-height: 1.25;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
+}
+.compact-card .c-role {
+  font-size: 10.5px;
+  color: var(--text-dim);
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
+}
+.compact-card .c-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2px;
+}
+.compact-card .c-tags .tag { font-size: 9px; padding: 1px 6px; }
+
+.compact-section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-faint);
+  margin: 14px 0 8px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.compact-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+
+
+/* === TABS === */
+.tabs-bar {
+  display: flex;
+  gap: 2px;
+  padding: 0 28px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  align-items: stretch;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.tab {
+  background: transparent;
+  border: none;
+  padding: 14px 18px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.15s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tab:hover { color: var(--text); }
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab .tab-count {
+  font-size: 10px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  background: var(--bg-soft);
+  padding: 2px 8px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+.tab.active .tab-count {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  border-color: var(--accent);
+}
+.tab svg { width: 14px; height: 14px; }
+
+/* === GROUPED VIEW (Por Team/Sector/Location) === */
+.grouped-view {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.group-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.group-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 18px 22px 14px;
+  background: linear-gradient(180deg, var(--bg-soft) 0%, var(--card) 100%);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.group-header:hover { background: var(--card-hover); }
+.group-header .group-toggle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  width: 16px;
+  text-align: center;
+}
+.group-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.3px;
+  color: var(--text);
+  flex: 1;
+}
+.group-meta {
+  font-size: 11px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  letter-spacing: 0.4px;
+}
+.group-meta b {
+  color: var(--text-dim);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  margin-right: 3px;
+}
+.group-body {
+  padding: 20px 22px 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 12px;
+}
+.group-block.collapsed .group-body { display: none; }
+
+/* Tarjetas estilo Evaluadores */
+.grouped-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 14px 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+.grouped-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  background: var(--card-hover);
+}
+.grouped-card.is-inactive { opacity: 0.55; }
+.grouped-card.is-baja { border-color: var(--warn); background: var(--warn-soft); }
+.grouped-card.is-me {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, var(--accent-soft) 0%, var(--card) 100%);
+  border-width: 1.5px;
+}
+.grouped-card.dimmed { opacity: 0.25; }
+.grouped-card.search-match { box-shadow: 0 0 0 2px var(--warn), var(--shadow-hover); border-color: var(--warn); }
+
+.grouped-card .avatar-big {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F5F2EA 0%, #EBE6D8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--text-dim);
+  letter-spacing: -0.5px;
+  border: 2px solid var(--card);
+  outline: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+.grouped-card .gc-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.15px;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
+}
+.grouped-card .gc-role {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
+}
+.grouped-card .gc-pill {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 11px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 4px;
+}
+.grouped-card .gc-pill.analista { background: var(--accent-soft); color: var(--accent-strong); }
+.grouped-card .gc-pill.consultor { background: #E8E3F5; color: #5B3FA8; }
+.grouped-card .gc-pill.senior { background: #D6F0EC; color: #006B62; }
+.grouped-card .gc-pill.manager { background: #FFE2D6; color: #B5460E; }
+.grouped-card .gc-pill.director { background: #1A1A1A; color: white; }
+.grouped-card .gc-pill.becaria { background: #DCF1E8; color: #047857; }
+.grouped-card .gc-pill.student { background: #F0EAD6; color: #6B5D1A; }
+.grouped-card .gc-pill.expert { background: #2A2F3D; color: white; }
+.grouped-card .gc-pill.other { background: var(--bg-soft); color: var(--text-dim); }
+
+.grouped-card .gc-mini-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2px;
+}
+.grouped-card .gc-mini-tags .tag { font-size: 9px; padding: 1px 6px; }
+
+.group-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 13px;
+  grid-column: 1 / -1;
+}
+
+
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="brand">
+    <div class="brand-mark">i.</div>
+    <div>
+      <h1>Equipo Inetum Consulting España</h1>
+      <div class="subtitle">Organigrama · TWWW</div>
+    </div>
+  </div>
+  <div class="toolbar">
+    <div class="search-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search" placeholder="Buscar persona, rol, team...">
+    </div>
+    <button class="btn-toolbar" id="expand-all">Expandir todo</button>
+    <button class="btn-toolbar" id="collapse-all">Colapsar todo</button>
+  </div>
+  <div class="stats">
+    <span><b id="stat-visible">0</b>visibles</span>
+    <span><b id="stat-total">0</b>total</span>
+  </div>
+</header>
+
+<div class="filters-bar" id="filters-bar">
+  <div class="filter-group">
+    <span class="filter-label">Estatus</span>
+    <div class="chips-row" id="filter-status"></div>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Sector</span>
+    <div class="chips-row" id="filter-sector"></div>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Team</span>
+    <div class="chips-row" id="filter-team"></div>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Location</span>
+    <div class="chips-row" id="filter-location"></div>
+  </div>
+  <button class="clear-btn" id="clear-filters">Limpiar filtros</button>
+</div>
+
+<nav class="tabs-bar">
+  <button class="tab active" data-view="hierarchy">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M12 7v4M6 17V13h12v4"/></svg>
+    Jerárquica
+    <span class="tab-count" id="tabcount-hierarchy">132</span>
+  </button>
+  <button class="tab" data-view="team">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Por Team
+    <span class="tab-count" id="tabcount-team">—</span>
+  </button>
+  <button class="tab" data-view="location">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Por Location
+    <span class="tab-count" id="tabcount-location">—</span>
+  </button>
+</nav>
+
+<main class="outline-wrapper">
+  <div id="outline"></div>
+  <div id="grouped-view" style="display:none;"></div>
+</main>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
+    <div class="modal-header" id="modal-header"></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-modal" id="btn-isolate">Ir al nodo</button>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+// === DATA ===
+// === DATA (se carga desde data.json) ===
+let DATA = { metadata: {}, tree: { id: 'ROOT_EQUIPO', directs: [], matrix: [] }, people: {} };
+const ME_ID = 'Monco-Ferre Almudena';
+
+// === JERARQUÍA POR ROL (seniority) ===
+const ROLE_RANK = {
+  'Manager Lead Equipo Consulting España': 0,
+  'Business Director': 1,
+  'Director': 2,
+  'Senior Manager': 3,
+  'Manager': 4,
+  'Expert': 4,
+  'Senior Consultant': 5,
+  'Consultant': 6,
+  'Analyst (Junior Consultant)': 7,
+  'Student': 8,
+  'Externo (Portugal/Brasil)': 9
+};
+function roleRank(r) { return ROLE_RANK[r] !== undefined ? ROLE_RANK[r] : 99; }
+
+// === CONSTRUCCIÓN DEL ÁRBOL ===
+// Estrategia híbrida:
+//  1. Si una persona tiene 'manager' (Responsable Staffing) que existe en la lista → cuelga de él
+//  2. Si no, se agrupa por Team y se ordena por seniority
+//  3. El más senior de cada team cuelga del leader (Director o Jose Otero)
+
+function buildTreeFromList(people) {
+  const peopleArr = Object.values(people).filter(p => 
+    !['ROOT_EQUIPO', 'SIN_ASIGNAR'].includes(p.id)
+  );
+  
+  // Garantizar Jose Otero (Manager Lead) — si no existe en la lista, crearlo virtual
+  let leader = peopleArr.find(p => roleRank(p.role) === 0);
+  if (!leader) {
+    people['JOSE_OTERO'] = people['JOSE_OTERO'] || {
+      id: 'JOSE_OTERO', fullName: 'Jose Otero', firstName: 'Jose', lastName: 'Otero',
+      initials: 'JO', role: 'Manager Lead Equipo Consulting España',
+      team: ['Equipo Consulting'], teamDisplay: 'Equipo Consulting',
+      sector: '', location: 'Madrid', entryDate: '', costCenter: '',
+      isJunior: false, status: 'Activo', inList: false, photoUrl: '', weeklyHours: '',
+      manager: '', mentor: ''
+    };
+    leader = people['JOSE_OTERO'];
+    peopleArr.push(leader);
+  }
+  
+  // Crear nodos vacíos por id
+  const nodes = {};
+  for (const p of peopleArr) {
+    nodes[p.id] = { id: p.id, directs: [], matrix: [], relation: 'direct' };
+  }
+  
+  // === PASO 1: Conexiones explícitas por "Responsable Staffing" (manager) ===
+  const placedByManager = new Set();
+  for (const p of peopleArr) {
+    if (p.id === leader.id) continue;
+    const mgrId = (p.manager || '').trim();
+    if (mgrId && nodes[mgrId] && mgrId !== p.id) {
+      nodes[mgrId].directs.push(nodes[p.id]);
+      placedByManager.add(p.id);
+    }
+  }
+  
+  // === PASO 2: Conexiones matriciales por "Mentor" ===
+  for (const p of peopleArr) {
+    const mentorId = (p.mentor || '').trim();
+    if (mentorId && nodes[mentorId] && mentorId !== p.id && p.id !== leader.id) {
+      // Solo añadir matrix si no es ya descendiente directo
+      if (!nodes[mentorId].directs.some(c => c.id === p.id)) {
+        // Crear copia con relation=matrix
+        const matrixNode = { id: p.id, directs: [], matrix: [], relation: 'matrix' };
+        nodes[mentorId].matrix.push(matrixNode);
+      }
+    }
+  }
+  
+  // === PASO 3: Para los que NO tienen manager, agrupar por Team bajo el head del team ===
+  const unplaced = peopleArr.filter(p => 
+    p.id !== leader.id && !placedByManager.has(p.id)
+  );
+  
+  // Agrupar unplaced por su primer team
+  const byTeam = {};
+  for (const p of unplaced) {
+    // Directors / Business Directors van directo al leader
+    if (['Business Director', 'Director'].includes(p.role)) {
+      byTeam['__direct_to_lead__'] = byTeam['__direct_to_lead__'] || [];
+      byTeam['__direct_to_lead__'].push(p);
+      continue;
+    }
+    if (p.role === 'Externo (Portugal/Brasil)') {
+      byTeam['Externos'] = byTeam['Externos'] || [];
+      byTeam['Externos'].push(p);
+      continue;
+    }
+    const teams = Array.isArray(p.team) ? p.team : (p.team ? [p.team] : []);
+    const mainTeam = teams[0] || 'Sin Equipo';
+    byTeam[mainTeam] = byTeam[mainTeam] || [];
+    byTeam[mainTeam].push(p);
+  }
+  
+  // Helper: ordenar por seniority
+  function sortBySeniority(list) {
+    return list.sort((a, b) => {
+      const rA = roleRank(a.role), rB = roleRank(b.role);
+      if (rA !== rB) return rA - rB;
+      return (a.fullName || '').localeCompare(b.fullName || '');
+    });
+  }
+  
+  // Encontrar el "head" de cada team: el más senior YA colocado (por manager) en ese team,
+  // o si no hay nadie colocado, el más senior del propio grupo unplaced.
+  const teamHeads = {}; // team → personId (para colgar de él)
+  
+  // Buscar entre personas ya colocadas que sean head natural de cada team
+  for (const p of peopleArr) {
+    if (!p.team || !p.team.length) continue;
+    const mainTeam = (Array.isArray(p.team) ? p.team[0] : p.team);
+    if (!mainTeam) continue;
+    if (['Director', 'Senior Manager', 'Manager'].includes(p.role)) {
+      const currentHead = teamHeads[mainTeam];
+      if (!currentHead || roleRank(p.role) < roleRank(people[currentHead].role)) {
+        teamHeads[mainTeam] = p.id;
+      }
+    }
+  }
+  
+  // Para los unplaced de cada team: si hay teamHead, cuelgan de él (con sub-ordenación)
+  // Si no, el más senior unplaced del team cuelga del leader, el resto bajo él
+  for (const teamName of Object.keys(byTeam)) {
+    if (teamName === '__direct_to_lead__' || teamName === 'Externos') continue;
+    const members = sortBySeniority(byTeam[teamName].slice());
+    if (!members.length) continue;
+    
+    const headId = teamHeads[teamName];
+    if (headId && nodes[headId]) {
+      // Cuelgan del team head
+      const head = nodes[headId];
+      const placed = [head];
+      for (const m of members) {
+        if (m.id === headId) continue;
+        const myRank = roleRank(m.role);
+        let parent = head;
+        // Buscar parent: el más reciente placed con rank menor
+        for (let j = placed.length - 1; j >= 0; j--) {
+          const cand = placed[j];
+          const candP = people[cand.id];
+          if (roleRank(candP.role) < myRank) { parent = cand; break; }
+        }
+        parent.directs.push(nodes[m.id]);
+        placed.push(nodes[m.id]);
+      }
+    } else {
+      // No hay head: el más senior cuelga del leader, los demás bajo él
+      const placed = [nodes[members[0].id]];
+      nodes[leader.id].directs.push(nodes[members[0].id]);
+      for (let i = 1; i < members.length; i++) {
+        const myRank = roleRank(members[i].role);
+        let parent = nodes[members[0].id];
+        for (let j = placed.length - 1; j >= 0; j--) {
+          const cand = placed[j];
+          const candP = people[cand.id];
+          if (roleRank(candP.role) < myRank) { parent = cand; break; }
+        }
+        parent.directs.push(nodes[members[i].id]);
+        placed.push(nodes[members[i].id]);
+      }
+    }
+  }
+  
+  // Directors y Business Directors que no tenían manager → cuelgan del leader
+  if (byTeam['__direct_to_lead__']) {
+    const dirs = sortBySeniority(byTeam['__direct_to_lead__']);
+    for (const d of dirs) {
+      // Solo si no ha sido ya colocado (defensivo)
+      if (!placedByManager.has(d.id)) {
+        nodes[leader.id].directs.push(nodes[d.id]);
+      }
+    }
+  }
+  
+  // Externos al final, todos colgando del leader
+  if (byTeam['Externos']) {
+    const ext = sortBySeniority(byTeam['Externos']);
+    for (const e of ext) {
+      nodes[leader.id].directs.push(nodes[e.id]);
+    }
+  }
+  
+  // ROOT virtual que contiene al leader
+  people['ROOT_EQUIPO'] = people['ROOT_EQUIPO'] || {
+    id: 'ROOT_EQUIPO', fullName: 'Equipo Inetum Consulting España',
+    firstName: 'Equipo', lastName: 'Inetum Consulting', initials: 'IC',
+    role: 'Inetum Consulting España', team: [], teamDisplay: '',
+    sector: '', location: 'España', entryDate: '', costCenter: '',
+    isJunior: false, status: 'Activo', inList: false, photoUrl: '', weeklyHours: ''
+  };
+  
+  return { id: 'ROOT_EQUIPO', directs: [nodes[leader.id]], matrix: [] };
+}
+
+// Normalización de una persona venida del JSON
+function normalizePerson(raw) {
+  const teams = Array.isArray(raw.team) ? raw.team 
+    : (typeof raw.team === 'string' && raw.team ? raw.team.split(/[,;]/).map(s => s.trim()).filter(Boolean) : []);
+  const firstName = raw.firstName || (raw.fullName ? raw.fullName.split(' ')[0] : '');
+  const lastName = raw.lastName || (raw.fullName ? raw.fullName.split(' ').slice(1).join(' ') : '');
+  const initials = raw.initials || ((firstName[0] || '') + (lastName[0] || '')).toUpperCase();
+  return {
+    id: raw.id,
+    fullName: raw.fullName || (firstName + ' ' + lastName).trim(),
+    firstName, lastName, initials,
+    role: raw.role || '',
+    team: teams,
+    teamDisplay: raw.teamDisplay || teams.join(', '),
+    sector: raw.sector || '',
+    location: raw.location || '',
+    entryDate: raw.entryDate || '',
+    costCenter: raw.costCenter || '',
+    sapCode: raw.sapCode || '',
+    isJunior: raw.isJunior === true || raw.isJunior === 'true' || raw.role === 'Analyst (Junior Consultant)',
+    status: raw.status || 'Activo',
+    inList: raw.inList !== false,
+    photoUrl: raw.photoUrl || '',
+    weeklyHours: raw.weeklyHours || '',
+    manager: raw.manager || '',
+    mentor: raw.mentor || '',
+    leaveDate: raw.leaveDate || ''
+  };
+}
+
+async function fetchData() {
+  try {
+    const resp = await fetch('./data.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('No se pudo cargar data.json (HTTP ' + resp.status + ')');
+    const raw = await resp.json();
+    
+    const peopleObj = {};
+    if (Array.isArray(raw.people)) {
+      for (const p of raw.people) {
+        const norm = normalizePerson(p);
+        peopleObj[norm.id] = norm;
+      }
+    } else {
+      for (const id in raw.people) {
+        const norm = normalizePerson(raw.people[id]);
+        peopleObj[norm.id] = norm;
+      }
+    }
+    
+    const tree = buildTreeFromList(peopleObj);
+    
+    DATA = {
+      metadata: raw.metadata || { 
+        title: 'Organigrama Equipo Inetum Consulting España', 
+        totalPeople: Object.keys(peopleObj).length, 
+        generatedAt: new Date().toISOString().slice(0,16).replace('T',' ') 
+      },
+      tree: tree,
+      people: peopleObj
+    };
+    
+    console.log('[Organigrama] Cargadas ' + Object.keys(peopleObj).length + ' personas desde data.json');
+  } catch (err) {
+    console.error('[Organigrama] Error cargando data.json:', err);
+    document.body.innerHTML = '<div style="padding:60px;font-family:Inter,sans-serif;max-width:600px;margin:80px auto;background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08)"><h1 style="font-family:Fraunces,serif;color:#E6007E;margin-bottom:16px">⚠️ No se pudo cargar data.json</h1><p style="color:#333;line-height:1.6">El archivo <code style="background:#f4f4f4;padding:2px 6px;border-radius:4px">data.json</code> no está disponible junto al HTML.</p><p style="color:#666;font-size:14px;margin-top:16px">Detalle: ' + err.message + '</p><p style="color:#666;font-size:13px;margin-top:24px;padding-top:16px;border-top:1px solid #eee">Asegúrate de que: <br>1) <b>data.json</b> está en la misma carpeta que <b>index.html</b><br>2) Estás accediendo via http(s):// (no file://)<br>3) Has hecho push del archivo a GitHub Pages</p></div>';
+    throw err;
+  }
+}
+
+// === STATE ===
+const state = {
+  collapsed: new Set(),
+  filters: { status: new Set(), sector: new Set(), team: new Set(), location: new Set() },
+  search: '',
+  selectedId: null,
+};
+
+// Count descendants helper
+function countDescendants(node) {
+  if (!node) return 0;
+  let n = 0;
+  for (const c of (node.directs || [])) n += 1 + countDescendants(c);
+  for (const c of (node.matrix || [])) n += 1 + countDescendants(c);
+  return n;
+}
+
+// === RENDER ===
+const outline = document.getElementById('outline');
+
+function renderOutline() {
+  outline.innerHTML = '';
+  // The tree root is "ROOT_EQUIPO" with children:
+  //  - JOSE_OTERO (main branch)
+  //  - sister branches (Elena Rodriguez, Irune Giron, etc.)
+  //  - SIN_ASIGNAR
+  
+  const root = DATA.tree;
+  const allChildren = [...(root.directs || []), ...(root.matrix || [])];
+  
+  // Split into sections
+  const joseNode = allChildren.find(c => c.id === 'JOSE_OTERO');
+  const sinAsignarNode = allChildren.find(c => c.id === 'SIN_ASIGNAR');
+  const sisterNodes = allChildren.filter(c => c.id !== 'JOSE_OTERO' && c.id !== 'SIN_ASIGNAR');
+  
+  // 1) Section title + Equipo + Jose Otero rama
+  const titleA = document.createElement('div');
+  titleA.className = 'outline-section-title';
+  titleA.textContent = 'Equipo principal · Jose Otero';
+  outline.appendChild(titleA);
+  
+  if (joseNode) {
+    const rootEl = renderRow(joseNode, true);
+    outline.appendChild(rootEl);
+  }
+  
+  // 2) Ramas hermanas
+  if (sisterNodes.length > 0) {
+    const titleB = document.createElement('div');
+    titleB.className = 'outline-section-title';
+    titleB.textContent = 'Ramas hermanas · Otros directos de Manuel García del Valle';
+    outline.appendChild(titleB);
+    for (const sn of sisterNodes) {
+      outline.appendChild(renderRow(sn, true));
+    }
+  }
+  
+  // 3) Sin asignar
+  if (sinAsignarNode && (sinAsignarNode.directs?.length || 0) > 0) {
+    const titleC = document.createElement('div');
+    titleC.className = 'outline-section-title';
+    titleC.textContent = 'Sin asignar · Sin manager identificado en SuccessFactors';
+    outline.appendChild(titleC);
+    outline.appendChild(renderRow(sinAsignarNode, true));
+  }
+  
+  applyVisualFilters();
+  updateStats();
+}
+
+function renderRow(node, isRoot = false) {
+  const person = DATA.people[node.id];
+  if (!person) return document.createDocumentFragment();
+  
+  const container = document.createElement('div');
+  container.className = 'row-container';
+  if (isRoot) container.classList.add('root-row');
+  container.dataset.id = node.id;
+  
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.dataset.id = node.id;
+  
+  // Classes based on type/status
+  if (node.relation === 'matrix') row.classList.add('is-matrix');
+  if (person.status === 'Inactivo') row.classList.add('is-inactive');
+  if (person.status === 'Baja Temporal') row.classList.add('is-baja');
+  if (node.id === ME_ID) row.classList.add('is-me');
+  if (node.id === 'JOSE_OTERO') row.classList.add('is-jose-otero');
+  if (node.id === 'SIN_ASIGNAR') row.classList.add('is-sin-asignar');
+  
+  const hasChildren = (node.directs?.length || 0) + (node.matrix?.length || 0) > 0;
+  const isCollapsed = state.collapsed.has(node.id);
+  const descCount = hasChildren ? countDescendants(node) : 0;
+  
+  // Toggle button
+  const toggle = document.createElement('button');
+  toggle.className = 'toggle' + (hasChildren ? '' : ' invisible');
+  toggle.innerHTML = isCollapsed ? '▶' : '▼';
+  toggle.title = isCollapsed ? 'Expandir' : 'Colapsar';
+  toggle.onclick = (e) => {
+    e.stopPropagation();
+    if (state.collapsed.has(node.id)) state.collapsed.delete(node.id);
+    else state.collapsed.add(node.id);
+    renderOutline();
+  };
+  row.appendChild(toggle);
+  
+  // Avatar
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  if (person.photoUrl) {
+    avatar.style.background = `url(${person.photoUrl}) center/cover`;
+    avatar.textContent = '';
+  } else {
+    avatar.textContent = person.initials || '??';
+  }
+  row.appendChild(avatar);
+  
+  // Info
+  const info = document.createElement('div');
+  info.className = 'info';
+  
+  const infoMain = document.createElement('div');
+  infoMain.className = 'info-main';
+  
+  const nameEl = document.createElement('div');
+  nameEl.className = 'name';
+  nameEl.textContent = person.fullName;
+  infoMain.appendChild(nameEl);
+  
+  if (person.role) {
+    const roleEl = document.createElement('div');
+    roleEl.className = 'role';
+    roleEl.textContent = person.role;
+    infoMain.appendChild(roleEl);
+  }
+  info.appendChild(infoMain);
+  
+  // Tags
+  const tags = document.createElement('div');
+  tags.className = 'tags';
+  if (node.relation === 'matrix') {
+    tags.innerHTML += '<span class="tag matrix-pill" title="Reporte matricial">Matrix</span>';
+  }
+  if (person.extraMatrixOf && person.extraMatrixOf.length > 0) {
+    const others = person.extraMatrixOf.join(', ');
+    tags.innerHTML += `<span class="tag matrix-extra" title="También reporta matricialmente a: ${others}">↔ ${others}</span>`;
+  }
+  if (person.teamDisplay && !['JOSE_OTERO','SIN_ASIGNAR','ROOT_EQUIPO'].includes(node.id)) {
+    const firstTeam = person.teamDisplay.split(',')[0].trim();
+    if (firstTeam) tags.innerHTML += `<span class="tag team">${firstTeam}</span>`;
+  }
+  if (person.location && !['JOSE_OTERO','SIN_ASIGNAR','ROOT_EQUIPO'].includes(node.id)) {
+    tags.innerHTML += `<span class="tag location">${person.location}</span>`;
+  }
+  if (person.isJunior) tags.innerHTML += '<span class="tag junior">Jr</span>';
+  if (person.status === 'Inactivo') tags.innerHTML += '<span class="tag inactive">Inactivo</span>';
+  if (person.status === 'Baja Temporal') tags.innerHTML += '<span class="tag baja">Baja temp.</span>';
+  info.appendChild(tags);
+  
+  row.appendChild(info);
+  
+  // Count badge
+  if (hasChildren) {
+    const badge = document.createElement('div');
+    badge.className = 'count-badge';
+    badge.textContent = descCount;
+    badge.title = `${descCount} personas en esta rama`;
+    row.appendChild(badge);
+  }
+  
+  // Click to open modal
+  row.onclick = () => openModal(node.id);
+  
+  container.appendChild(row);
+  
+  // Children
+  if (hasChildren && !isCollapsed) {
+    const childrenWrap = document.createElement('div');
+    childrenWrap.className = 'row-children';
+    
+    // Render directs first, then matrix
+    const directs = (node.directs || []).slice();
+    const matrix = (node.matrix || []).slice();
+    
+    for (const c of directs) {
+      const childNode = { ...c, relation: c.relation || 'direct' };
+      childrenWrap.appendChild(renderRow(childNode));
+    }
+    for (const c of matrix) {
+      const childNode = { ...c, relation: 'matrix' };
+      childrenWrap.appendChild(renderRow(childNode));
+    }
+    container.appendChild(childrenWrap);
+  }
+  
+  return container;
+}
+
+
+
+function renderCompactCard(node) {
+  const person = DATA.people[node.id];
+  if (!person) return document.createDocumentFragment();
+  
+  const card = document.createElement('div');
+  card.className = 'compact-card';
+  card.dataset.id = node.id;
+  
+  if (node.relation === 'matrix') card.classList.add('is-matrix');
+  if (person.status === 'Inactivo') card.classList.add('is-inactive');
+  if (person.status === 'Baja Temporal') card.classList.add('is-baja');
+  if (node.id === ME_ID) card.classList.add('is-me');
+  
+  // Avatar (grande)
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar-lg';
+  if (person.photoUrl) {
+    avatar.style.background = `url(${person.photoUrl}) center/cover`;
+    avatar.textContent = '';
+  } else {
+    avatar.textContent = person.initials || '??';
+  }
+  card.appendChild(avatar);
+  
+  // Nombre
+  const nm = document.createElement('div');
+  nm.className = 'c-name';
+  nm.textContent = person.fullName;
+  card.appendChild(nm);
+  
+  // Rol
+  if (person.role) {
+    const rl = document.createElement('div');
+    rl.className = 'c-role';
+    rl.textContent = person.role;
+    card.appendChild(rl);
+  }
+  
+  // Tags
+  const tags = document.createElement('div');
+  tags.className = 'c-tags';
+  if (node.relation === 'matrix') tags.innerHTML += '<span class="tag matrix-pill">Matrix</span>';
+  if (person.teamDisplay) {
+    const t = person.teamDisplay.split(',')[0].trim();
+    if (t) tags.innerHTML += `<span class="tag team">${t}</span>`;
+  }
+  if (person.location) tags.innerHTML += `<span class="tag location">${person.location}</span>`;
+  if (person.isJunior) tags.innerHTML += '<span class="tag junior">Jr</span>';
+  if (person.status === 'Inactivo') tags.innerHTML += '<span class="tag inactive">Inactivo</span>';
+  if (person.status === 'Baja Temporal') tags.innerHTML += '<span class="tag baja">Baja</span>';
+  card.appendChild(tags);
+  
+  card.onclick = () => openModal(node.id);
+  return card;
+}
+
+// === FILTERS ===
+function buildFilters() {
+  const statuses = {}, sectors = {}, teams = {}, locations = {};
+  for (const p of Object.values(DATA.people)) {
+    if (!p.inList) continue;
+    if (p.status) statuses[p.status] = (statuses[p.status] || 0) + 1;
+    if (p.sector) sectors[p.sector] = (sectors[p.sector] || 0) + 1;
+    for (const t of (p.team || [])) if (t) teams[t] = (teams[t] || 0) + 1;
+    if (p.location) locations[p.location] = (locations[p.location] || 0) + 1;
+  }
+  renderChips('filter-status', statuses, 'status');
+  renderChips('filter-sector', sectors, 'sector');
+  renderChips('filter-team', teams, 'team');
+  renderChips('filter-location', locations, 'location');
+}
+
+function renderChips(containerId, items, filterKey) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  container.style.display = 'flex';
+  container.style.gap = '6px';
+  container.style.flexWrap = 'wrap';
+  
+  const entries = Object.entries(items).sort((a,b) => b[1] - a[1]);
+  for (const [name, count] of entries) {
+    const chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.innerHTML = `${name}<span class="count">${count}</span>`;
+    chip.onclick = () => {
+      if (state.filters[filterKey].has(name)) {
+        state.filters[filterKey].delete(name);
+        chip.classList.remove('active');
+      } else {
+        state.filters[filterKey].add(name);
+        chip.classList.add('active');
+      }
+      applyVisualFilters();
+    };
+    container.appendChild(chip);
+  }
+}
+
+function personMatchesFilters(p) {
+  if (!p) return false;
+  for (const [key, set] of Object.entries(state.filters)) {
+    if (set.size === 0) continue;
+    if (key === 'team') {
+      const hasMatch = (p.team || []).some(t => set.has(t));
+      if (!hasMatch) return false;
+    } else {
+      if (!set.has(p[key])) return false;
+    }
+  }
+  return true;
+}
+
+function applyVisualFilters() {
+  const hasSearch = state.search && state.search.length > 0;
+  const hasFilters = Object.values(state.filters).some(s => s.size > 0);
+  const anyActive = hasSearch || hasFilters;
+  
+  let visibleCount = 0;
+  
+  // 1) Determinar qué IDs matchean
+  const matchingIds = new Set();
+  if (anyActive) {
+    for (const [id, p] of Object.entries(DATA.people)) {
+      if (!p.inList) continue;
+      let match = true;
+      if (hasSearch) {
+        const q = state.search.toLowerCase().trim();
+        const hay = `${p.fullName} ${p.role || ''} ${p.teamDisplay || ''} ${p.sector || ''} ${p.location || ''}`.toLowerCase();
+        if (!hay.includes(q)) match = false;
+      }
+      if (match && hasFilters && !personMatchesFilters(p)) match = false;
+      if (match) matchingIds.add(id);
+    }
+  }
+  
+  // 2) Para la vista jerárquica: también incluir ancestros de los que matchean (para que se vea el camino)
+  const visibleInTree = new Set(matchingIds);
+  if (anyActive && currentView === 'hierarchy') {
+    function addAncestors(node, path) {
+      if (!node) return;
+      path.push(node.id);
+      if (matchingIds.has(node.id)) {
+        for (const id of path) visibleInTree.add(id);
+      }
+      for (const c of [...(node.directs || []), ...(node.matrix || [])]) {
+        addAncestors(c, path);
+      }
+      path.pop();
+    }
+    addAncestors(DATA.tree, []);
+  }
+  
+  // 3) Aplicar visibilidad a cada elemento
+  for (const row of document.querySelectorAll('.row, .grouped-card')) {
+    const id = row.dataset.id;
+    const p = DATA.people[id];
+    row.classList.remove('search-match', 'dimmed');
+    row.style.display = '';
+    
+    if (!p) continue;
+    
+    if (!anyActive) {
+      visibleCount++;
+      continue;
+    }
+    
+    const isSpecial = ['JOSE_OTERO', 'SIN_ASIGNAR', 'ROOT_EQUIPO'].includes(id);
+    
+    if (currentView === 'hierarchy') {
+      // En jerárquica: ocultar si no está en visibleInTree
+      // Pero los "specials" sí los mostramos siempre (cabeceras)
+      const isVisible = visibleInTree.has(id) || isSpecial;
+      if (!isVisible) {
+        // Ocultar el contenedor entero (incluye hijos)
+        const container = row.closest('.row-container');
+        if (container) container.style.display = 'none';
+      } else {
+        const container = row.closest('.row-container');
+        if (container) container.style.display = '';
+        if (matchingIds.has(id)) {
+          row.classList.add('search-match');
+          visibleCount++;
+        }
+      }
+    } else {
+      // En vistas agrupadas: ocultar tarjetas que no matcheen
+      if (matchingIds.has(id) || (isSpecial && p.inList)) {
+        row.style.display = '';
+        if (matchingIds.has(id) && hasSearch) row.classList.add('search-match');
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    }
+  }
+  
+  // 4) En vistas agrupadas: ocultar grupos vacíos
+  if (currentView !== 'hierarchy') {
+    for (const block of document.querySelectorAll('.group-block')) {
+      const visibleCards = block.querySelectorAll('.grouped-card:not([style*="display: none"])').length;
+      block.style.display = visibleCards === 0 && anyActive ? 'none' : '';
+    }
+  }
+  
+  document.getElementById('stat-visible').textContent = visibleCount;
+}
+
+function updateStats() {
+  const total = Object.values(DATA.people).filter(p => p.inList).length;
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-visible').textContent = document.querySelectorAll('.row:not(.dimmed)').length;
+}
+
+// === ACTIONS ===
+let searchDebounce = null;
+document.getElementById('search').oninput = (e) => {
+  state.search = e.target.value;
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(() => {
+    // Si estamos en vista jerárquica y hay búsqueda, auto-expandir ancestros de matches
+    if (currentView === 'hierarchy' && state.search.trim().length > 0) {
+      const q = state.search.toLowerCase().trim();
+      // Encontrar todos los IDs que matchean
+      const matchingIds = new Set();
+      for (const [id, p] of Object.entries(DATA.people)) {
+        if (!p.inList) continue;
+        const hay = `${p.fullName} ${p.role || ''} ${p.teamDisplay || ''} ${p.sector || ''} ${p.location || ''}`.toLowerCase();
+        if (hay.includes(q)) matchingIds.add(id);
+      }
+      // Expandir ancestros de cada match
+      function expandTo(targetId) {
+        const path = [];
+        function find(node) {
+          if (!node) return false;
+          path.push(node.id);
+          if (node.id === targetId) return true;
+          for (const c of [...(node.directs || []), ...(node.matrix || [])]) {
+            if (find(c)) return true;
+          }
+          path.pop();
+          return false;
+        }
+        find(DATA.tree);
+        for (let i = 0; i < path.length - 1; i++) {
+          state.collapsed.delete(path[i]);
+        }
+      }
+      for (const id of matchingIds) expandTo(id);
+      renderOutline();
+    } else {
+      applyVisualFilters();
+    }
+  }, 150);
+};
+
+document.getElementById('clear-filters').onclick = () => {
+  for (const set of Object.values(state.filters)) set.clear();
+  document.querySelectorAll('.chip.active').forEach(c => c.classList.remove('active'));
+  state.search = '';
+  document.getElementById('search').value = '';
+  state.highlightBranch = null;
+  applyVisualFilters();
+};
+
+function computeBranch(targetId) {
+  const result = new Set();
+  function findPath(node, path) {
+    if (!node) return false;
+    path.push(node.id);
+    if (node.id === targetId) {
+      for (const id of path) result.add(id);
+      return true;
+    }
+    for (const c of [...(node.directs || []), ...(node.matrix || [])]) {
+      if (findPath(c, path)) return true;
+    }
+    path.pop();
+    return false;
+  }
+  findPath(DATA.tree, []);
+  function findAndAddDesc(node) {
+    if (!node) return;
+    if (node.id === targetId) {
+      function walk(n) {
+        if (!n) return;
+        result.add(n.id);
+        for (const c of [...(n.directs || []), ...(n.matrix || [])]) walk(c);
+      }
+      walk(node);
+      return;
+    }
+    for (const c of [...(node.directs || []), ...(node.matrix || [])]) findAndAddDesc(c);
+  }
+  findAndAddDesc(DATA.tree);
+  return result;
+}
+
+function expandAncestors(targetId) {
+  const path = [];
+  function find(node) {
+    if (!node) return false;
+    path.push(node.id);
+    if (node.id === targetId) return true;
+    for (const c of [...(node.directs || []), ...(node.matrix || [])]) {
+      if (find(c)) return true;
+    }
+    path.pop();
+    return false;
+  }
+  find(DATA.tree);
+  // Expand all ancestors (except the target itself) so target is visible
+  for (let i = 0; i < path.length - 1; i++) {
+    state.collapsed.delete(path[i]);
+  }
+}
+
+
+document.getElementById('expand-all').onclick = () => {
+  state.collapsed.clear();
+  renderOutline();
+};
+document.getElementById('collapse-all').onclick = () => {
+  function walk(n) {
+    if (!n) return;
+    const hasChildren = (n.directs?.length || 0) + (n.matrix?.length || 0) > 0;
+    if (hasChildren && n.id !== 'ROOT_EQUIPO') state.collapsed.add(n.id);
+    for (const c of [...(n.directs || []), ...(n.matrix || [])]) walk(c);
+  }
+  walk(DATA.tree);
+  // But always keep Jose Otero expanded so something is visible
+  state.collapsed.delete('JOSE_OTERO');
+  renderOutline();
+};
+
+// === MODAL ===
+const modalOverlay = document.getElementById('modal-overlay');
+const modalHeader = document.getElementById('modal-header');
+const modalBody = document.getElementById('modal-body');
+
+function openModal(id) {
+  const p = DATA.people[id];
+  if (!p) return;
+  state.selectedId = id;
+  
+  modalHeader.innerHTML = `
+    <div class="avatar">${p.initials || '??'}</div>
+    <div class="modal-title">
+      <h2>${p.fullName}</h2>
+      <div class="role">${p.role || ''}</div>
+    </div>
+  `;
+  
+  const rows = [];
+  if (p.teamDisplay) rows.push(['Team', p.teamDisplay]);
+  if (p.sector) rows.push(['Práctica/Sector', p.sector]);
+  if (p.location) rows.push(['Ubicación', p.location]);
+  if (p.entryDate) rows.push(['Fecha de entrada', p.entryDate]);
+  if (p.costCenter) rows.push(['Centro de coste', p.costCenter]);
+  if (p.status && p.status !== '—') {
+    let cls = 'team';
+    if (p.status === 'Inactivo') cls = 'inactive';
+    else if (p.status === 'Baja Temporal') cls = 'baja';
+    else if (p.status === 'Activo') cls = 'junior';
+    rows.push(['Estatus', `<span class="tag ${cls}">${p.status}</span>`]);
+  }
+  if (p.isJunior) rows.push(['Junior', '<span class="tag junior">Sí</span>']);
+  if (p.weeklyHours) rows.push(['Horas semanales', p.weeklyHours]);
+  
+  modalBody.innerHTML = rows.length
+    ? rows.map(([l,v]) => `<div class="detail-row"><div class="detail-label">${l}</div><div class="detail-value">${v}</div></div>`).join('')
+    : '<div style="color: var(--text-faint); font-size: 13px; text-align: center; padding: 24px 0;">Sin información adicional</div>';
+  
+  modalOverlay.classList.add('active');
+}
+
+document.getElementById('modal-close').onclick = () => modalOverlay.classList.remove('active');
+modalOverlay.onclick = (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('active'); };
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modalOverlay.classList.remove('active'); });
+
+document.getElementById('btn-isolate').onclick = () => {
+  if (state.selectedId) {
+    state.highlightBranch = computeBranch(state.selectedId);
+      expandAncestors(state.selectedId);
+    renderOutline();
+    modalOverlay.classList.remove('active');
+    setTimeout(() => {
+      const target = document.querySelector(`.row[data-id="${state.selectedId}"]`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
+};
+
+
+
+
+// === GROUPED VIEWS (Por Team, Sector, Location) ===
+const groupedView = document.getElementById('grouped-view');
+const outlineEl = document.getElementById('outline');
+let currentView = 'hierarchy';
+
+// Ordenar roles por jerarquía para visualizarlos en las tarjetas
+const ROLE_PRIORITY = {
+  'Manager Lead Equipo Consulting España': 0,
+  'Business Director': 1,
+  'Director': 2,
+  'Manager': 3,
+  'Senior Manager': 3,
+  'Expert': 4,
+  'Senior Consultant': 5,
+  'Consultant': 6,
+  'Analyst (Junior Consultant)': 7,
+  'Student': 8,
+};
+function rolePriority(role) {
+  if (!role) return 99;
+  if (ROLE_PRIORITY[role] !== undefined) return ROLE_PRIORITY[role];
+  return 50;
+}
+
+function roleToPillClass(role) {
+  if (!role) return 'other';
+  const r = role.toLowerCase();
+  if (r.includes('director')) return 'director';
+  if (r.includes('manager')) return 'manager';
+  if (r.includes('senior consultant')) return 'senior';
+  if (r.includes('expert')) return 'expert';
+  if (r.includes('consultant') && r.includes('junior')) return 'analista';
+  if (r.includes('analyst')) return 'analista';
+  if (r.includes('consultant')) return 'consultor';
+  if (r.includes('student')) return 'student';
+  if (r.includes('becari')) return 'becaria';
+  return 'other';
+}
+
+function shortRoleLabel(role) {
+  if (!role) return '';
+  const r = role.toLowerCase();
+  if (r.includes('manager lead')) return 'Lead';
+  if (r.includes('business director')) return 'Business Dir.';
+  if (r.includes('director')) return 'Director';
+  if (r.includes('senior manager')) return 'Sr. Manager';
+  if (r.includes('manager')) return 'Manager';
+  if (r.includes('senior consultant')) return 'Senior';
+  if (r.includes('expert')) return 'Expert';
+  if (r.includes('analyst')) return 'Analista';
+  if (r.includes('consultant')) return 'Consultor';
+  if (r.includes('student')) return 'Student';
+  if (r.includes('becari')) return 'Becaria';
+  return role;
+}
+
+function buildGroups(groupKey) {
+  // groupKey: 'team' | 'sector' | 'location'
+  const groups = new Map();
+  
+  for (const [pid, p] of Object.entries(DATA.people)) {
+    if (!p.inList) continue;  // Solo personas reales
+    
+    let keys = [];
+    if (groupKey === 'team') {
+      keys = (p.team && p.team.length > 0) ? p.team : ['Sin team'];
+    } else if (groupKey === 'sector') {
+      keys = [p.sector || 'Sin sector'];
+    } else if (groupKey === 'location') {
+      keys = [p.location || 'Sin location'];
+    }
+    
+    for (const k of keys) {
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(p);
+    }
+  }
+  
+  // Ordenar grupos por tamaño descendente
+  const sortedGroups = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
+  
+  // Ordenar miembros de cada grupo por prioridad de rol, luego por nombre
+  for (const [_, members] of sortedGroups) {
+    members.sort((a, b) => {
+      const dp = rolePriority(a.role) - rolePriority(b.role);
+      if (dp !== 0) return dp;
+      return a.fullName.localeCompare(b.fullName);
+    });
+  }
+  
+  return sortedGroups;
+}
+
+function renderGroupedView(groupKey) {
+  groupedView.innerHTML = '';
+  const groups = buildGroups(groupKey);
+  
+  const wrapper = document.createElement('div');
+  wrapper.className = 'grouped-view';
+  
+  // Calcular conteo de roles para el meta
+  const labelMap = {
+    team: 'team',
+    sector: 'sector',
+    location: 'ubicación',
+  };
+  
+  for (const [groupName, members] of groups) {
+    const block = document.createElement('div');
+    block.className = 'group-block';
+    block.dataset.groupName = groupName;
+    
+    // Contar por rol mayor
+    const roleCounts = {};
+    let activeCount = 0;
+    for (const m of members) {
+      const lbl = shortRoleLabel(m.role);
+      roleCounts[lbl] = (roleCounts[lbl] || 0) + 1;
+      if (m.status === 'Activo') activeCount++;
+    }
+    const roleSummary = Object.entries(roleCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 4)
+      .map(([lbl, n]) => `${n} ${lbl}`)
+      .join(' · ');
+    
+    const header = document.createElement('div');
+    header.className = 'group-header';
+    header.innerHTML = `
+      <span class="group-toggle">▼</span>
+      <span class="group-title">${groupName}</span>
+      <span class="group-meta"><b>${members.length}</b>${members.length === 1 ? 'persona' : 'personas'} · ${activeCount} activos${roleSummary ? ' · ' + roleSummary : ''}</span>
+    `;
+    header.onclick = () => {
+      block.classList.toggle('collapsed');
+      const tog = header.querySelector('.group-toggle');
+      tog.textContent = block.classList.contains('collapsed') ? '▶' : '▼';
+    };
+    block.appendChild(header);
+    
+    const body = document.createElement('div');
+    body.className = 'group-body';
+    
+    if (members.length === 0) {
+      body.innerHTML = '<div class="group-empty">Sin personas en este grupo</div>';
+    } else {
+      for (const p of members) {
+        body.appendChild(renderGroupedCard(p));
+      }
+    }
+    block.appendChild(body);
+    
+    wrapper.appendChild(block);
+  }
+  
+  groupedView.appendChild(wrapper);
+  applyVisualFilters();
+}
+
+function renderGroupedCard(person) {
+  const card = document.createElement('div');
+  card.className = 'grouped-card row';  // 'row' para que applyVisualFilters lo recoja
+  card.dataset.id = person.id;
+  
+  if (person.status === 'Inactivo') card.classList.add('is-inactive');
+  if (person.status === 'Baja Temporal') card.classList.add('is-baja');
+  if (person.id === ME_ID) card.classList.add('is-me');
+  
+  // Avatar
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar-big';
+  if (person.photoUrl) {
+    avatar.style.background = `url(${person.photoUrl}) center/cover`;
+    avatar.textContent = '';
+  } else {
+    avatar.textContent = person.initials || '??';
+  }
+  card.appendChild(avatar);
+  
+  // Nombre
+  const nameEl = document.createElement('div');
+  nameEl.className = 'gc-name';
+  nameEl.textContent = person.fullName;
+  card.appendChild(nameEl);
+  
+  // Pill de rol (tipo Evaluadores)
+  if (person.role) {
+    const pill = document.createElement('span');
+    pill.className = 'gc-pill ' + roleToPillClass(person.role);
+    pill.textContent = shortRoleLabel(person.role);
+    card.appendChild(pill);
+  }
+  
+  // Mini-tags
+  const tags = document.createElement('div');
+  tags.className = 'gc-mini-tags';
+  // Team/Sector/Location depending on view
+  if (currentView !== 'team' && person.teamDisplay) {
+    const t = person.teamDisplay.split(',')[0].trim();
+    if (t) tags.innerHTML += `<span class="tag team">${t}</span>`;
+  }
+  if (currentView !== 'location' && person.location) {
+    tags.innerHTML += `<span class="tag location">${person.location}</span>`;
+  }
+  if (person.isJunior) tags.innerHTML += '<span class="tag junior">Jr</span>';
+  if (person.status === 'Inactivo') tags.innerHTML += '<span class="tag inactive">Inactivo</span>';
+  if (person.status === 'Baja Temporal') tags.innerHTML += '<span class="tag baja">Baja</span>';
+  card.appendChild(tags);
+  
+  card.onclick = () => openModal(person.id);
+  return card;
+}
+
+// === TAB SWITCHING ===
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(tab => {
+  tab.onclick = () => {
+    const view = tab.dataset.view;
+    if (view === currentView) return;
+    currentView = view;
+    tabs.forEach(t => t.classList.toggle('active', t === tab));
+    
+    if (view === 'hierarchy') {
+      outlineEl.style.display = '';
+      groupedView.style.display = 'none';
+      applyVisualFilters();
+    } else {
+      outlineEl.style.display = 'none';
+      groupedView.style.display = '';
+      renderGroupedView(view);
+    }
+  };
+});
+
+// Update tab counts
+function updateTabCounts() {
+  const total = Object.values(DATA.people).filter(p => p.inList).length;
+  document.getElementById('tabcount-hierarchy').textContent = total;
+  
+  const teams = new Set();
+  const sectors = new Set();
+  const locations = new Set();
+  for (const p of Object.values(DATA.people)) {
+    if (!p.inList) continue;
+    for (const t of (p.team || [])) teams.add(t);
+    if (p.sector) sectors.add(p.sector);
+    if (p.location) locations.add(p.location);
+  }
+  document.getElementById('tabcount-team').textContent = teams.size;
+  document.getElementById('tabcount-location').textContent = locations.size;
+}
+updateTabCounts();
+
+
+// === INIT ===
+function initialCollapse() {
+  // Collapse depth >= 2 for cleanliness on first load
+  function walk(node, depth) {
+    if (!node) return;
+    const hasChildren = (node.directs?.length || 0) + (node.matrix?.length || 0) > 0;
+    if (!hasChildren) return;
+    if (node.id === 'ROOT_EQUIPO') {/* keep expanded */}
+    else if (node.id === 'JOSE_OTERO') {/* keep expanded */}
+    else if (node.id === 'SIN_ASIGNAR') { state.collapsed.add(node.id); return; }
+    else if (depth >= 2) { state.collapsed.add(node.id); return; }
+    for (const c of [...(node.directs || []), ...(node.matrix || [])]) walk(c, depth + 1);
+  }
+  walk(DATA.tree, 0);
+}
+
+// === Carga inicial async ===
+fetchData().then(() => {
+  initialCollapse();
+  buildFilters();
+  renderOutline();
+}).catch(e => console.error('[Organigrama] Error en init:', e));
+</script>
+<!-- Indicador de fuente de datos -->
+<style>
+.data-source-badge {
+  position: fixed; bottom: 12px; right: 12px; z-index: 50;
+  background: #FFFFFF; border: 1px solid #E5E3DD; border-radius: 999px;
+  padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: #6B6B6B; box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  display: flex; align-items: center; gap: 6px;
+}
+.data-source-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #007F73; }
+</style>
+<div class="data-source-badge" title="Datos cargados desde data.json (origen: Microsoft List)">
+  <span class="dot"></span><span>data.json · Microsoft List</span>
+</div>
+</body>
+</html>
